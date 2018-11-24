@@ -29,7 +29,8 @@ Show simulation of drilling, with predictions updating
 To create the python environment (windows), use:
 ```bash
 conda create -n mysticbit python=3 anaconda
-activate mysticbit
+conda activate mysticbit
+python -m ipykernel install --name mysticbit
 ```
 
 

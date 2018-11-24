@@ -33,12 +33,13 @@ def make_model(df_ml_train, X_cols, y_cols):
 
 
 def make_predictions(model, df_ml, X_cols, y_cols):
+    df_pred = df_ml.copy()
     """ Use trained model to make predictions, add on to df_ml as new column"""
 
-    X = df_ml[X_cols]
-    y = df_ml[y_cols]
+    X = df_pred[X_cols]
+    y = df_pred[y_cols]
 
     y_pred = model.predict(X)
     pred_cols = [c + '_pred' for c in y_cols]
-    df_ml[pred_cols] = pd.DataFrame(y_pred, index=df_ml.index)
-    return df_ml
+    df_pred[pred_cols] = pd.DataFrame(y_pred, index=df_pred.index)
+    return df_pred

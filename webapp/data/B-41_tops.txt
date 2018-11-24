@@ -1,0 +1,11 @@
+# B-41 Formation tops
+# Depths in metres
+WyanDot FM,858.62158
+DAWSON CANYON FM,985.113
+LOGAN CANYON FM,1157.0207
+Upper MISSISAUGA FM,-2246.9856M
+Lower MISSISAUGA FM,3190.6464
+Base O-Marker,2472.561
+Abenaki,-999.25
+pay_sand_1,
+TD,-999.25

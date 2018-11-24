@@ -1,0 +1,10 @@
+{
+	"folders": [
+		{
+			"path": "."
+		}
+	],
+	"settings": {
+		"python.pythonPath": "/home/alessandro/anaconda3/envs/hackathon/bin/python"
+	}
+}

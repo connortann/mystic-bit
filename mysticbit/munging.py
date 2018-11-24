@@ -12,7 +12,7 @@ def load_log_data():
 
 
 def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=[1, 2, 3],
-                        label_cols=['GR'], label_lags=[5, 10]):
+                        label_cols=['GR'], label_lags=[5, 10], dropna=True):
     """ Create dataframe with 'features' and 'labels', from the raw log dataframe """
 
     cols_to_keep = list(set(['TVDSS', 'HACKANAME', 'RES_ID'] + feature_cols + label_cols))
@@ -25,18 +25,20 @@ def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=[1, 2, 3],
              .groupby(['HACKANAME', 'TVDSS'])
              .mean())
 
-    # Feature lagging
+    # Feature lagging (above the current bit depth)
     for col in feature_cols:
         for lag in feature_lags:
-            kwargs = {col + '_' + str(lag): lambda x: x[col].groupby('HACKANAME').shift(lag)}
+            kwargs = {col + '_lag_' + str(lag): lambda x: x[col].groupby('HACKANAME').shift(lag)}
             df_ml = df_ml.assign(**kwargs)
 
-    # Label lagging
+    # Label lagging (below the current bit depth)
     for col in label_cols:
         for lag in label_lags:
-            kwargs = {'futr_' + col + '_' + str(lag): lambda x: x[col].groupby('HACKANAME').shift(-lag)}
+            kwargs = {col + '_futr_' + str(lag): lambda x: x[col].groupby('HACKANAME').shift(-lag)}
             df_ml = df_ml.assign(**kwargs)
 
-    df_ml = df_ml.dropna()
+    if dropna:
+        df_ml = df_ml.dropna()
 
-    return df_ml
+
+    return df_ml.reset_index()

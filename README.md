@@ -20,8 +20,17 @@ Show simulation of drilling, with predictions updating
 
 ### Repo layout
 
-notebooks: Jupyter notebooks
+- notebooks: Jupyter notebooks
+- mysticbit: module to store key python functions
+- data: data (obvs)
 
-mysticbit: module to store key python functions
+### Conda environment
 
-data: data (obvs)
+To create the python environment (windows), use:
+```bash
+conda create -n mysticbit python=3 anaconda
+conda activate mysticbit
+python -m ipykernel install --name mysticbit
+```
+
+

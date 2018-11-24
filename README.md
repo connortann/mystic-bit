@@ -7,7 +7,7 @@
 * Patrick Davies
 * Lawrie
 * Alessandro
-* Dan
+* Dan Austin
 
 ### Vision
 

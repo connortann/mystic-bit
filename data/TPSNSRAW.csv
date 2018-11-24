@@ -1,0 +1,337 @@
+F1,Name,Play,Value,Label
+Source,Pleistocene,Moray Firth & CNS,,false
+Source,Oligo-Miocene,Moray Firth & CNS,,false
+Source,Eocene,Moray Firth & CNS,,false
+Source,Paleocene,Moray Firth & CNS,,false
+Source,Upper Cretaceous,Moray Firth & CNS,,false
+Source,Lower Cretaceous,Moray Firth & CNS,1,Source
+Source,Upper Jurassic,Moray Firth & CNS,2,Source
+Source,Middle Jurassic,Moray Firth & CNS,1,Source
+Source,Lower Jurassic,Moray Firth & CNS,,false
+Source,Triassic,Moray Firth & CNS,,false
+Source,Permian,Moray Firth & CNS,,false
+Source,Carboniferous,Moray Firth & CNS,,false
+Source,Devonian,Moray Firth & CNS,2,Source
+Source,"Basement ",Moray Firth & CNS,,false
+Reservoir,Pleistocene,Moray Firth & CNS,,false
+Reservoir,Oligo-Miocene,Moray Firth & CNS,,false
+Reservoir,Eocene,Moray Firth & CNS,3,Reservoir
+Reservoir,Paleocene,Moray Firth & CNS,2,Reservoir
+Reservoir,Upper Cretaceous,Moray Firth & CNS,3,Reservoir
+Reservoir,Lower Cretaceous,Moray Firth & CNS,2,Reservoir
+Reservoir,Upper Jurassic,Moray Firth & CNS,2,Reservoir
+Reservoir,Middle Jurassic,Moray Firth & CNS,2,Reservoir
+Reservoir,Lower Jurassic,Moray Firth & CNS,2,Reservoir
+Reservoir,Triassic,Moray Firth & CNS,,false
+Reservoir,Permian,Moray Firth & CNS,1,Reservoir
+Reservoir,Carboniferous,Moray Firth & CNS,2,Reservoir
+Reservoir,Devonian,Moray Firth & CNS,6,Reservoir
+Reservoir,"Basement ",Moray Firth & CNS,,false
+Seal,Pleistocene,Moray Firth & CNS,,false
+Seal,Oligo-Miocene,Moray Firth & CNS,,false
+Seal,Eocene,Moray Firth & CNS,2,Seal
+Seal,Paleocene,Moray Firth & CNS,3,Seal
+Seal,Upper Cretaceous,Moray Firth & CNS,3,Seal
+Seal,Lower Cretaceous,Moray Firth & CNS,6,Seal
+Seal,Upper Jurassic,Moray Firth & CNS,,false
+Seal,Middle Jurassic,Moray Firth & CNS,4,Seal
+Seal,Lower Jurassic,Moray Firth & CNS,7,Seal
+Seal,Triassic,Moray Firth & CNS,,false
+Seal,Permian,Moray Firth & CNS,2,Seal
+Seal,Carboniferous,Moray Firth & CNS,,false
+Seal,Devonian,Moray Firth & CNS,1,Seal
+Seal,"Basement ",Moray Firth & CNS,,false
+Overburden,Pleistocene,Moray Firth & CNS,3,Overburden
+Overburden,Oligo-Miocene,Moray Firth & CNS,2,Overburden
+Overburden,Eocene,Moray Firth & CNS,,false
+Overburden,Paleocene,Moray Firth & CNS,,false
+Overburden,Upper Cretaceous,Moray Firth & CNS,5,Overburden
+Overburden,Lower Cretaceous,Moray Firth & CNS,5,Overburden
+Overburden,Upper Jurassic,Moray Firth & CNS,,false
+Overburden,Middle Jurassic,Moray Firth & CNS,5,Overburden
+Overburden,Lower Jurassic,Moray Firth & CNS,5,Overburden
+Overburden,Triassic,Moray Firth & CNS,5,Overburden
+Overburden,Permian,Moray Firth & CNS,,false
+Overburden,Carboniferous,Moray Firth & CNS,,false
+Overburden,Devonian,Moray Firth & CNS,3,Overburden
+Overburden,"Basement ",Moray Firth & CNS,,false
+Trap Formation,Pleistocene,Moray Firth & CNS,,false
+Trap Formation,Oligo-Miocene,Moray Firth & CNS,,false
+Trap Formation,Eocene,Moray Firth & CNS,,false
+Trap Formation,Paleocene,Moray Firth & CNS,,false
+Trap Formation,Upper Cretaceous,Moray Firth & CNS,,false
+Trap Formation,Lower Cretaceous,Moray Firth & CNS,,false
+Trap Formation,Upper Jurassic,Moray Firth & CNS,,false
+Trap Formation,Middle Jurassic,Moray Firth & CNS,2,Trap Formation
+Trap Formation,Lower Jurassic,Moray Firth & CNS,3,Trap Formation
+Trap Formation,Triassic,Moray Firth & CNS,,false
+Trap Formation,Permian,Moray Firth & CNS,,false
+Trap Formation,Carboniferous,Moray Firth & CNS,,false
+Trap Formation,Devonian,Moray Firth & CNS,,false
+Trap Formation,"Basement ",Moray Firth & CNS,,false
+Migration,Pleistocene,Moray Firth & CNS,2,Migration
+Migration,Oligo-Miocene,Moray Firth & CNS,3,Migration
+Migration,Eocene,Moray Firth & CNS,3,Migration
+Migration,Paleocene,Moray Firth & CNS,3,Migration
+Migration,Upper Cretaceous,Moray Firth & CNS,5,Migration
+Migration,Lower Cretaceous,Moray Firth & CNS,5,Migration
+Migration,Upper Jurassic,Moray Firth & CNS,3,Migration
+Migration,Middle Jurassic,Moray Firth & CNS,3,Migration
+Migration,Lower Jurassic,Moray Firth & CNS,2,Migration
+Migration,Triassic,Moray Firth & CNS,,false
+Migration,Permian,Moray Firth & CNS,,false
+Migration,Carboniferous,Moray Firth & CNS,,false
+Migration,Devonian,Moray Firth & CNS,6,Migration
+Migration,"Basement ",Moray Firth & CNS,,false
+Critical Movement,Pleistocene,Moray Firth & CNS,,false
+Critical Movement,Oligo-Miocene,Moray Firth & CNS,,false
+Critical Movement,Eocene,Moray Firth & CNS,,false
+Critical Movement,Paleocene,Moray Firth & CNS,,false
+Critical Movement,Upper Cretaceous,Moray Firth & CNS,,false
+Critical Movement,Lower Cretaceous,Moray Firth & CNS,,false
+Critical Movement,Upper Jurassic,Moray Firth & CNS,,false
+Critical Movement,Middle Jurassic,Moray Firth & CNS,,false
+Critical Movement,Lower Jurassic,Moray Firth & CNS,,false
+Critical Movement,Triassic,Moray Firth & CNS,,false
+Critical Movement,Permian,Moray Firth & CNS,,false
+Critical Movement,Carboniferous,Moray Firth & CNS,,false
+Critical Movement,Devonian,Moray Firth & CNS,,false
+Critical Movement,"Basement ",Moray Firth & CNS,,false
+Risk,Pleistocene,Moray Firth & CNS,6,Risk
+Risk,Oligo-Miocene,Moray Firth & CNS,6,Risk
+Risk,Eocene,Moray Firth & CNS,6,Risk
+Risk,Paleocene,Moray Firth & CNS,6,Risk
+Risk,Upper Cretaceous,Moray Firth & CNS,,false
+Risk,Lower Cretaceous,Moray Firth & CNS,,false
+Risk,Upper Jurassic,Moray Firth & CNS,,false
+Risk,Middle Jurassic,Moray Firth & CNS,,false
+Risk,Lower Jurassic,Moray Firth & CNS,,false
+Risk,Triassic,Moray Firth & CNS,,false
+Risk,Permian,Moray Firth & CNS,,false
+Risk,Carboniferous,Moray Firth & CNS,,false
+Risk,Devonian,Moray Firth & CNS,,false
+Risk,"Basement ",Moray Firth & CNS,,false
+Source,Pleistocene,North North Sea,0,false
+Source,Oligo-Miocene,North North Sea,0,false
+Source,Eocene,North North Sea,0,false
+Source,Paleocene,North North Sea,0,false
+Source,Upper Cretaceous,North North Sea,0,false
+Source,Lower Cretaceous,North North Sea,0,false
+Source,Upper Jurassic,North North Sea,5,Source
+Source,Middle Jurassic,North North Sea,5,Source
+Source,Lower Jurassic,North North Sea,2,Source
+Source,Triassic,North North Sea,0,false
+Source,Permian,North North Sea,0,false
+Source,Carboniferous,North North Sea,0,false
+Source,Devonian,North North Sea,0,false
+Source,"Basement ",North North Sea,0,false
+Reservoir,Pleistocene,North North Sea,0,false
+Reservoir,Oligo-Miocene,North North Sea,1,Reservoir
+Reservoir,Eocene,North North Sea,1,Reservoir
+Reservoir,Paleocene,North North Sea,3,Reservoir
+Reservoir,Upper Cretaceous,North North Sea,0,false
+Reservoir,Lower Cretaceous,North North Sea,0,false
+Reservoir,Upper Jurassic,North North Sea,2,Reservoir
+Reservoir,Middle Jurassic,North North Sea,2,Reservoir
+Reservoir,Lower Jurassic,North North Sea,2,Reservoir
+Reservoir,Triassic,North North Sea,5,Reservoir
+Reservoir,Permian,North North Sea,0,false
+Reservoir,Carboniferous,North North Sea,0,false
+Reservoir,Devonian,North North Sea,0,false
+Reservoir,"Basement ",North North Sea,0,false
+Seal,Pleistocene,North North Sea,1,Seal
+Seal,Oligo-Miocene,North North Sea,3,Seal
+Seal,Eocene,North North Sea,3,Seal
+Seal,Paleocene,North North Sea,3,Seal
+Seal,Upper Cretaceous,North North Sea,0,false
+Seal,Lower Cretaceous,North North Sea,5,Seal
+Seal,Upper Jurassic,North North Sea,5,Seal
+Seal,Middle Jurassic,North North Sea,5,Seal
+Seal,Lower Jurassic,North North Sea,5,Seal
+Seal,Triassic,North North Sea,0,false
+Seal,Permian,North North Sea,0,false
+Seal,Carboniferous,North North Sea,0,false
+Seal,Devonian,North North Sea,0,false
+Seal,"Basement ",North North Sea,0,false
+Overburden,Pleistocene,North North Sea,3,Overburden
+Overburden,Oligo-Miocene,North North Sea,3,Overburden
+Overburden,Eocene,North North Sea,3,Overburden
+Overburden,Paleocene,North North Sea,3,Overburden
+Overburden,Upper Cretaceous,North North Sea,5,Overburden
+Overburden,Lower Cretaceous,North North Sea,5,Overburden
+Overburden,Upper Jurassic,North North Sea,0,false
+Overburden,Middle Jurassic,North North Sea,0,false
+Overburden,Lower Jurassic,North North Sea,0,false
+Overburden,Triassic,North North Sea,0,false
+Overburden,Permian,North North Sea,0,false
+Overburden,Carboniferous,North North Sea,0,false
+Overburden,Devonian,North North Sea,0,false
+Overburden,"Basement ",North North Sea,0,false
+Trap Formation,Pleistocene,North North Sea,4,Trap Formation
+Trap Formation,Oligo-Miocene,North North Sea,4,Trap Formation
+Trap Formation,Eocene,North North Sea,4,Trap Formation
+Trap Formation,Paleocene,North North Sea,5,Trap Formation
+Trap Formation,Upper Cretaceous,North North Sea,5,Trap Formation
+Trap Formation,Lower Cretaceous,North North Sea,5,Trap Formation
+Trap Formation,Upper Jurassic,North North Sea,5,Trap Formation
+Trap Formation,Middle Jurassic,North North Sea,0,false
+Trap Formation,Lower Jurassic,North North Sea,0,false
+Trap Formation,Triassic,North North Sea,0,false
+Trap Formation,Permian,North North Sea,0,false
+Trap Formation,Carboniferous,North North Sea,0,false
+Trap Formation,Devonian,North North Sea,0,false
+Trap Formation,"Basement ",North North Sea,0,false
+Migration,Pleistocene,North North Sea,3,Migration
+Migration,Oligo-Miocene,North North Sea,3,Migration
+Migration,Eocene,North North Sea,3,Migration
+Migration,Paleocene,North North Sea,5,Migration
+Migration,Upper Cretaceous,North North Sea,0,false
+Migration,Lower Cretaceous,North North Sea,0,false
+Migration,Upper Jurassic,North North Sea,0,false
+Migration,Middle Jurassic,North North Sea,0,false
+Migration,Lower Jurassic,North North Sea,0,false
+Migration,Triassic,North North Sea,0,false
+Migration,Permian,North North Sea,0,false
+Migration,Carboniferous,North North Sea,0,false
+Migration,Devonian,North North Sea,0,false
+Migration,"Basement ",North North Sea,0,false
+Critical Movement,Pleistocene,North North Sea,0,false
+Critical Movement,Oligo-Miocene,North North Sea,0,false
+Critical Movement,Eocene,North North Sea,0,false
+Critical Movement,Paleocene,North North Sea,0,false
+Critical Movement,Upper Cretaceous,North North Sea,0,false
+Critical Movement,Lower Cretaceous,North North Sea,0,false
+Critical Movement,Upper Jurassic,North North Sea,0,false
+Critical Movement,Middle Jurassic,North North Sea,0,false
+Critical Movement,Lower Jurassic,North North Sea,0,false
+Critical Movement,Triassic,North North Sea,0,false
+Critical Movement,Permian,North North Sea,0,false
+Critical Movement,Carboniferous,North North Sea,0,false
+Critical Movement,Devonian,North North Sea,0,false
+Critical Movement,"Basement ",North North Sea,0,false
+Risk,Pleistocene,North North Sea,25,Risk
+Risk,Oligo-Miocene,North North Sea,25,Risk
+Risk,Eocene,North North Sea,25,Risk
+Risk,Paleocene,North North Sea,25,Risk
+Risk,Upper Cretaceous,North North Sea,25,Risk
+Risk,Lower Cretaceous,North North Sea,25,Risk
+Risk,Upper Jurassic,North North Sea,0,false
+Risk,Middle Jurassic,North North Sea,0,false
+Risk,Lower Jurassic,North North Sea,0,false
+Risk,Triassic,North North Sea,0,false
+Risk,Permian,North North Sea,0,false
+Risk,Carboniferous,North North Sea,0,false
+Risk,Devonian,North North Sea,0,false
+Risk,"Basement ",North North Sea,0,false
+Source,Pleistocene,ESP,,false
+Source,Oligo-Miocene,ESP,,false
+Source,Eocene,ESP,,false
+Source,Paleocene,ESP,,false
+Source,Upper Cretaceous,ESP,,false
+Source,Lower Cretaceous,ESP,3,Source
+Source,Upper Jurassic,ESP,1,Source
+Source,Middle Jurassic,ESP,2,Source
+Source,Lower Jurassic,ESP,,false
+Source,Triassic,ESP,,false
+Source,Permian,ESP,,false
+Source,Carboniferous,ESP,4,Source
+Source,Devonian,ESP,1,Source
+Source,"Basement ",ESP,,false
+Reservoir,Pleistocene,ESP,,false
+Reservoir,Oligo-Miocene,ESP,0.6,Reservoir
+Reservoir,Eocene,ESP,2,Reservoir
+Reservoir,Paleocene,ESP,4,Reservoir
+Reservoir,Upper Cretaceous,ESP,,false
+Reservoir,Lower Cretaceous,ESP,,false
+Reservoir,Upper Jurassic,ESP,1.5,Reservoir
+Reservoir,Middle Jurassic,ESP,1,Reservoir
+Reservoir,Lower Jurassic,ESP,,false
+Reservoir,Triassic,ESP,0.2,Reservoir
+Reservoir,Permian,ESP,,false
+Reservoir,Carboniferous,ESP,,false
+Reservoir,Devonian,ESP,4,Reservoir
+Reservoir,"Basement ",ESP,,false
+Seal,Pleistocene,ESP,1.5,Seal
+Seal,Oligo-Miocene,ESP,1.2,Seal
+Seal,Eocene,ESP,2.4,Seal
+Seal,Paleocene,ESP,4,Seal
+Seal,Upper Cretaceous,ESP,1.2,Seal
+Seal,Lower Cretaceous,ESP,1.2,Seal
+Seal,Upper Jurassic,ESP,1.5,Seal
+Seal,Middle Jurassic,ESP,,false
+Seal,Lower Jurassic,ESP,,false
+Seal,Triassic,ESP,,false
+Seal,Permian,ESP,0.2,Seal
+Seal,Carboniferous,ESP,,false
+Seal,Devonian,ESP,,false
+Seal,"Basement ",ESP,,false
+Overburden,Pleistocene,ESP,1.5,Overburden
+Overburden,Oligo-Miocene,ESP,1.2,Overburden
+Overburden,Eocene,ESP,2.4,Overburden
+Overburden,Paleocene,ESP,4,Overburden
+Overburden,Upper Cretaceous,ESP,1.2,Overburden
+Overburden,Lower Cretaceous,ESP,1.2,Overburden
+Overburden,Upper Jurassic,ESP,1.5,Overburden
+Overburden,Middle Jurassic,ESP,1.5,Overburden
+Overburden,Lower Jurassic,ESP,1.2,Overburden
+Overburden,Triassic,ESP,1,Overburden
+Overburden,Permian,ESP,1,Overburden
+Overburden,Carboniferous,ESP,2.4,Overburden
+Overburden,Devonian,ESP,1,Overburden
+Overburden,"Basement ",ESP,,false
+Trap Formation,Pleistocene,ESP,1.5,Trap Formation
+Trap Formation,Oligo-Miocene,ESP,1.8,Trap Formation
+Trap Formation,Eocene,ESP,3.2,Trap Formation
+Trap Formation,Paleocene,ESP,4,Trap Formation
+Trap Formation,Upper Cretaceous,ESP,,false
+Trap Formation,Lower Cretaceous,ESP,2,Trap Formation
+Trap Formation,Upper Jurassic,ESP,2.5,Trap Formation
+Trap Formation,Middle Jurassic,ESP,2.5,Trap Formation
+Trap Formation,Lower Jurassic,ESP,2,Trap Formation
+Trap Formation,Triassic,ESP,0.2,Trap Formation
+Trap Formation,Permian,ESP,,false
+Trap Formation,Carboniferous,ESP,4,Trap Formation
+Trap Formation,Devonian,ESP,1,Trap Formation
+Trap Formation,"Basement ",ESP,,false
+Migration,Pleistocene,ESP,1.5,Migration
+Migration,Oligo-Miocene,ESP,1.8,Migration
+Migration,Eocene,ESP,3.2,Migration
+Migration,Paleocene,ESP,4,Migration
+Migration,Upper Cretaceous,ESP,2,Migration
+Migration,Lower Cretaceous,ESP,2,Migration
+Migration,Upper Jurassic,ESP,1,Migration
+Migration,Middle Jurassic,ESP,,false
+Migration,Lower Jurassic,ESP,,false
+Migration,Triassic,ESP,,false
+Migration,Permian,ESP,,false
+Migration,Carboniferous,ESP,4,Migration
+Migration,Devonian,ESP,2,Migration
+Migration,"Basement ",ESP,,false
+Critical Movement,Pleistocene,ESP,,false
+Critical Movement,Oligo-Miocene,ESP,,false
+Critical Movement,Eocene,ESP,,false
+Critical Movement,Paleocene,ESP,,false
+Critical Movement,Upper Cretaceous,ESP,,false
+Critical Movement,Lower Cretaceous,ESP,,false
+Critical Movement,Upper Jurassic,ESP,,false
+Critical Movement,Middle Jurassic,ESP,,false
+Critical Movement,Lower Jurassic,ESP,,false
+Critical Movement,Triassic,ESP,,false
+Critical Movement,Permian,ESP,,false
+Critical Movement,Carboniferous,ESP,,false
+Critical Movement,Devonian,ESP,,false
+Critical Movement,"Basement ",ESP,,false
+Risk,Pleistocene,ESP,,false
+Risk,Oligo-Miocene,ESP,,false
+Risk,Eocene,ESP,8,Risk
+Risk,Paleocene,ESP,5,Risk
+Risk,Upper Cretaceous,ESP,,false
+Risk,Lower Cretaceous,ESP,,false
+Risk,Upper Jurassic,ESP,,false
+Risk,Middle Jurassic,ESP,,false
+Risk,Lower Jurassic,ESP,4,Risk
+Risk,Triassic,ESP,2,Risk
+Risk,Permian,ESP,,false
+Risk,Carboniferous,ESP,26.4,Risk
+Risk,Devonian,ESP,5,Risk
+Risk,"Basement ",ESP,,false

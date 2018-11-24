@@ -59,3 +59,18 @@ def make_log_plot(df_logs, well_name, cols=['GR', 'DT', 'CALI'], ztop=None, zbot
 
     return f, ax
 
+
+def add_predictions(ax, predictions):
+    """ Add predicted bands onto plt axes"""
+
+    # Scatter plot
+    ax.scatter(predictions['value'], predictions['TVDSS'], marker='+')
+
+    # Shaded bands
+    tvds = predictions[predictions.model_name == 'high']['TVDSS']
+    x_hi = predictions[predictions.model_name == 'high']['value']
+    x_lo = predictions[predictions.model_name == 'low']['value']
+
+    ax.fill(np.concatenate([x_lo, x_hi[::-1]]),
+            np.concatenate([tvds, tvds[::-1]]),
+            alpha=0.5)

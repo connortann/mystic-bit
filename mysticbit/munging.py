@@ -1,7 +1,7 @@
 """ Code to load and prep data """
 
 import pandas as pd
-
+import numpy as np
 
 def load_log_data():
     """ Return pandas dataframe of log data """
@@ -12,18 +12,26 @@ def load_log_data():
 
 
 def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=range(0, 50, 2),
-                        label_cols=['GR'], label_lags=[2, 4, 6, 8, 10], dropna=True):
+                        label_cols=['GR'], label_lags=[2, 4, 6, 8, 10], dropna=True,
+                        sample_step=1.5):
     """ Create dataframe with 'features' and 'labels', from the raw log dataframe """
 
+    # Drop unused columns
     cols_to_keep = list(set(['TVDSS', 'HACKANAME', 'RES_ID'] + feature_cols + label_cols))
+    df = df[cols_to_keep].copy()
 
-    # Resample at 1m
-    # TODO: resampling that handles RESID
-    df_ml = df.copy()
-    df_ml = (df_ml[cols_to_keep]
-             .astype({"TVDSS": int})
-             .groupby(['HACKANAME', 'TVDSS'])
-             .mean())
+    # Resample at uniform rate
+    df = df.set_index('TVDSS')
+    resampled_dfs = []
+
+    for well in df['HACKANAME'].unique():
+        df_well = df[df['HACKANAME'] == well]
+        new_index = np.arange(int(df_well.index.min()), df_well.index.max(), sample_step)
+        df_well = df_well.reindex(new_index, method='nearest', tolerance=sample_step * 0.6)
+        resampled_dfs.append(df_well)
+
+    df_ml = pd.concat(resampled_dfs, axis=0)
+    print(df_ml.head())
 
     # Feature lagging (above the current bit depth)
     for col in feature_cols:

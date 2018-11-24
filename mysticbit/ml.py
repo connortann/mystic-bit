@@ -1,5 +1,5 @@
 """ Core ML functions"""
-
+import pandas as pd
 from sklearn.ensemble import RandomForestRegressor
 from sklearn.multioutput import MultiOutputRegressor
 from sklearn.pipeline import Pipeline
@@ -39,5 +39,6 @@ def make_predictions(model, df_ml, X_cols, y_cols):
     y = df_ml[y_cols]
 
     y_pred = model.predict(X)
-    df_ml[y_col+'_pred'] = y_pred
+    pred_cols = [c + '_pred' for c in y_cols]
+    df_ml[pred_cols] = pd.DataFrame(y_pred, index=df_ml.index)
     return df_ml

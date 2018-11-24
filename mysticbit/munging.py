@@ -42,3 +42,24 @@ def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=[1, 2, 3],
 
 
     return df_ml.reset_index()
+
+
+def get_log_predictions(df_ml, well_name, bit_depth, prediction_col_names=['GR_futr_10', 'GR_futr_5_pred']):
+    """ Lookup predictions indexed by depth """
+
+    pred_row = df_ml[(df_ml.HACKANAME == well_name) &
+                     (df_ml.TVDSS == bit_depth)]
+
+    assert len(pred_row) == 1, 'No predictions found for that well at that depth'
+
+    result = (pd.melt(pred_row,
+                      id_vars=['HACKANAME', 'TVDSS'],
+                      value_vars=prediction_col_names,
+                      var_name='pred_col'
+                      )
+              .rename(columns={'TVDSS': 'TVDSS_bit_depth'})
+              .assign(offset=lambda x: x['pred_col'].str.extract('(\d+)').astype('float'))
+              .assign(log_name=lambda x: x['pred_col'].str.split('_').str[0])
+              .assign(TVDSS=lambda x: x['TVDSS_bit_depth'] + x['offset'])
+              )
+    return result

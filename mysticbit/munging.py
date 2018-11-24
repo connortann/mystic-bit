@@ -40,4 +40,5 @@ def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=[1, 2, 3],
     if dropna:
         df_ml = df_ml.dropna()
 
-    return df_ml
+
+    return df_ml.reset_index()

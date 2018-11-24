@@ -1,10 +1,21 @@
 """ Core ML functions"""
 import pandas as pd
-from sklearn.ensemble import RandomForestRegressor
-from sklearn.ensemble import GradientBoostingRegressor
+from sklearn.ensemble import RandomForestRegressor, GradientBoostingRegressor
 from sklearn.multioutput import MultiOutputRegressor
-from sklearn.pipeline import Pipeline
+from sklearn.pipeline import Pipeline, make_pipeline
 from sklearn.model_selection import LeavePGroupsOut
+from sklearn.preprocessing import RobustScaler
+from sklearn.cluster import KMeans
+
+
+def create_facies(df_logs):
+    """ Adds a facies column from clustering"""
+    pipe = make_pipeline(RobustScaler(), KMeans(n_clusters=4))
+    X = df_logs[['GR', 'RHOB', 'NPHI', 'DT']]
+    cluster_id = pipe.fit_predict(X)
+    df_logs['facies'] = cluster_id
+    df_logs['facies'] = 'facies_' + df_logs['Facies'].astype(str)
+    return df_logs
 
 
 def train_test_split(df_ml):

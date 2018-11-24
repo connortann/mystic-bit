@@ -62,6 +62,7 @@ def get_log_predictions(df_pred, well_name, bit_depth):
               .rename(columns={'TVDSS': 'TVDSS_bit_depth'})
               .assign(offset=lambda x: x['pred_col'].str.extract('(\d+)').astype('float'))
               .assign(log_name=lambda x: x['pred_col'].str.split('_').str[0])
+              .assign(model_name=lambda x: x['pred_col'].str.split('_').str[-1])
               .assign(TVDSS=lambda x: x['TVDSS_bit_depth'] + x['offset'])
               )
     return result

@@ -14,8 +14,7 @@ def create_facies(df_logs, k):
     x = df_logs[['GR', 'RHOB', 'NPHI', 'DT']]
     cluster_id = pipe.fit_predict(x)
     df_logs['facies'] = cluster_id
-    df_logs['facies'] = 'facies_' + df_logs['Facies'].astype(str)
-    return df_logs
+    return df_logs['facies']
 
 
 def train_test_split(df_ml):

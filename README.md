@@ -8,6 +8,7 @@
 * Lawrie
 * Alessandro
 * Dan Austin
+* Jeremy
 
 ### Vision
 

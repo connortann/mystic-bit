@@ -11,8 +11,8 @@ def load_log_data():
     return df
 
 
-def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=[1, 2, 3],
-                        label_cols=['GR'], label_lags=[5, 10], dropna=True):
+def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=range(0, 50, 2),
+                        label_cols=['GR'], label_lags=[2, 4, 6, 8, 10], dropna=True):
     """ Create dataframe with 'features' and 'labels', from the raw log dataframe """
 
     cols_to_keep = list(set(['TVDSS', 'HACKANAME', 'RES_ID'] + feature_cols + label_cols))
@@ -42,3 +42,26 @@ def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=[1, 2, 3],
 
 
     return df_ml.reset_index()
+
+
+def get_log_predictions(df_pred, well_name, bit_depth):
+    """ Lookup predictions indexed by depth """
+
+    prediction_col_names = [c for c in df_pred if 'pred' in c]
+
+    pred_row = df_pred[(df_pred.HACKANAME == well_name) &
+                       (df_pred.TVDSS == bit_depth)]
+
+    assert len(pred_row) == 1, 'No predictions found for that well at that depth'
+
+    result = (pd.melt(pred_row,
+                      id_vars=['HACKANAME', 'TVDSS'],
+                      value_vars=prediction_col_names,
+                      var_name='pred_col'
+                      )
+              .rename(columns={'TVDSS': 'TVDSS_bit_depth'})
+              .assign(offset=lambda x: x['pred_col'].str.extract('(\d+)').astype('float'))
+              .assign(log_name=lambda x: x['pred_col'].str.split('_').str[0])
+              .assign(TVDSS=lambda x: x['TVDSS_bit_depth'] + x['offset'])
+              )
+    return result

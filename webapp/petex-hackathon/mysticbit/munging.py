@@ -5,7 +5,7 @@ import pandas as pd
 
 def load_log_data():
     """ Return pandas dataframe of log data """
-    df = (pd.read_csv('../data/HACKA_DS.csv', sep=';')
+    df = (pd.read_csv('../../data/HACKA_DS.csv', sep=';')
           .rename(columns=lambda x: x.strip())
           )
     return df

@@ -5,7 +5,8 @@ import numpy as np
 import pandas as pd 
 import matplotlib.pyplot as plt
 import json
-import mysticbit as mb
+from mysticbit import ml
+from mysticbit import munging
 
 import plotly
 import plotly.plotly as py
@@ -41,37 +42,71 @@ def run_mystic_depth():
     graphJSON = json.dumps(graphs, cls=plotly.utils.PlotlyJSONEncoder)
     return render_template('depth_template.html', ids=ids, graphJSON=graphJSON)
 
-@app.route('/mystic-predicted')
+""" @app.route('/mystic-predicted')
 def run_mystic_predicted():
-    df = pd.read_csv('./static/TEST_PREDICTED_OUTPUT.csv', sep=',')
-    depth = df['DEPTH'].tolist()
-    gr_actual = df['GR_ACTUAL'].tolist()
-    gr_p10 = df['GR_PREDICT_P10'].tolist()
-    gr_p50 = df['GR_PREDICT_P50'].tolist()
-    gr_p90 = df['GR_PREDICT_P90'].tolist()
+    df = munging.load_log_data()
+    filtered_df = df.loc[df['HACKANAME'] == 'B03']
+    depth = filtered_df['TVDSS'].tolist()
+    gr_actual = filtered_df['GR'].tolist()
+    #gr_p10 = df['GR_PREDICT_P10'].tolist()
+    # gr_p50 = df['GR_PREDICT_P50'].tolist()
+    # gr_p90 = df['GR_PREDICT_P90'].tolist()
     trace0 = go.Scatter(x = gr_actual, y = depth,name = 'gr actual',line = dict(color = ('rgb(205, 12, 24)'), width = 4))
-    trace1 = go.Scatter(x = gr_p10, y = depth, name = 'gr P10', line = dict(color = ('rgb(22, 96, 167)'), width = 4, dash = 'dash'))
-    trace2 = go.Scatter(x = gr_p50, y = depth, name = 'gr P50', line = dict(color = ('rgb(22, 96, 167)'), width = 4, dash = 'dash'))
-    trace3 = go.Scatter(x = gr_p90, y = depth, name = 'gr P90', line = dict(color = ('rgb(22, 96, 167)'), width = 4, dash = 'dash'))
+    #trace1 = go.Scatter(x = gr_p10, y = depth, name = 'gr P10', line = dict(color = ('rgb(22, 96, 167)'), width = 4, dash = 'dash'))
+    #trace2 = go.Scatter(x = gr_p50, y = depth, name = 'gr P50', line = dict(color = ('rgb(22, 96, 167)'), width = 4, dash = 'dash'))
+    #trace3 = go.Scatter(x = gr_p90, y = depth, name = 'gr P90', line = dict(color = ('rgb(22, 96, 167)'), width = 4, dash = 'dash'))
 
-    data = [trace0, trace1, trace2, trace3]
+    data = [trace0]
     layout = dict(title = 'Mystic Predict', xaxis=dict(title='G RAPI'), yaxis=dict(title='Depth', autorange='reversed'))
     fig = dict(data=data, layout=layout)
-    # plot(fig, filename='templates/test_predicted')
-    return render_template('test_predicted.html')
+    plot(fig, filename='templates/test_predicted')
+    # return render_template('test_predicted.html') """
 
-    @app.route('/main')
-    def run_main():
-        # df = pd.read_csv('./static/TEST_PREDICTED_OUTPUT.csv', sep=',')
-        # munged_data = mb.munging.create_ml_dataframe()
-        return None
+@app.route('/home')
+def index():
+    return render_template(
+        'test_drop.html',
+        data=[{'name':'B03'}, {'name':'B05'}, {'name':'B06'}, {'name':'B08'}, {'name':'B12'}, {'name':'B13'}, {'name':'B14'}, {'name':'B200'}, {'name':'G06'}, {'name':'G08'}, {'name':'G09'}, {'name':'G10'}, {'name':'G12'}, {'name':'G15'}, {'name':'G16'}, {'name':'G070'}, {'name':'B0700'}, {'name':'G17'}])
 
+@app.route("/mystic-predicted" , methods=['GET', 'POST'])
+def test():
+    select = request.form.get('comp_select')
+    df = munging.load_log_data()
+    filtered_df = df.loc[df['HACKANAME'] == select]
+    depth = filtered_df['TVDSS'].tolist()
+    gr_actual = filtered_df['GR'].tolist()
+    #gr_p10 = df['GR_PREDICT_P10'].tolist()
+    # gr_p50 = df['GR_PREDICT_P50'].tolist()
+    # gr_p90 = df['GR_PREDICT_P90'].tolist()
+    trace0 = go.Scatter(x = gr_actual, y = depth,name = 'gr actual',line = dict(color = ('rgb(205, 12, 24)'), width = 4))
+    #trace1 = go.Scatter(x = gr_p10, y = depth, name = 'gr P10', line = dict(color = ('rgb(22, 96, 167)'), width = 4, dash = 'dash'))
+    #trace2 = go.Scatter(x = gr_p50, y = depth, name = 'gr P50', line = dict(color = ('rgb(22, 96, 167)'), width = 4, dash = 'dash'))
+    #trace3 = go.Scatter(x = gr_p90, y = depth, name = 'gr P90', line = dict(color = ('rgb(22, 96, 167)'), width = 4, dash = 'dash'))
+
+    data = [trace0]
+    layout = dict(title = 'Mystic Predict', xaxis=dict(title='G RAPI'), yaxis=dict(title='Depth', autorange='reversed'))
+    fig = dict(data=data, layout=layout)
+    plot(fig, filename='templates/test_predicted')
+    # return render_template('test_predicted.html')
+    return(str(select)) # just to see what select is
+
+if __name__=='__main__':
+    app.run(debug=True)
+
+
+@app.route('/dashboard')
+def run_main():
+    df = munging.load_log_data()
+    x = df['TVDSS']
+    y = df['GR']
+    plt.plot(x, y)
+    plt.savefig('static/raw_data.png')
+    return render_template('raw_data_template.html', url='/static/raw_data.png')
 
 @app.route('/minimal')
 def minimal():
     data = request.args.get('data', '')
     return render_template('minimal.html', data=data)
-
 
 if __name__ == "__main__":
     # for debug

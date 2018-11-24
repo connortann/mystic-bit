@@ -28,13 +28,13 @@ def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=[1, 2, 3],
     # Feature lagging
     for col in feature_cols:
         for lag in feature_lags:
-            kwargs = {col + '_' + str(lag): lambda x: x[col].shift(lag)}
+            kwargs = {col + '_' + str(lag): lambda x: x[col].groupby('HACKANAME').shift(lag)}
             df_ml = df_ml.assign(**kwargs)
 
     # Label lagging
     for col in label_cols:
         for lag in label_lags:
-            kwargs = {'futr_' + col + '_' + str(lag): lambda x: x[col].shift(-lag)}
+            kwargs = {'futr_' + col + '_' + str(lag): lambda x: x[col].groupby('HACKANAME').shift(-lag)}
             df_ml = df_ml.assign(**kwargs)
 
     df_ml = df_ml.dropna()

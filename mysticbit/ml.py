@@ -14,7 +14,7 @@ def create_facies(df_logs):
     X = df_logs[['GR', 'RHOB', 'NPHI', 'DT']]
     cluster_id = pipe.fit_predict(X)
     df_logs['facies'] = cluster_id
-    df_logs['facies'] = 'facies_' + df_logs['Facies'].astype(str)
+    df_logs['facies'] = 'facies_' + df_logs['facies'].astype(str)
     return df_logs
 
 

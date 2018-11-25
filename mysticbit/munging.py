@@ -2,10 +2,12 @@
 
 import pandas as pd
 import numpy as np
+import os
 
 def load_log_data():
     """ Return pandas dataframe of log data """
-    df = (pd.read_csv('../data/HACKA_DS.csv', sep=';')
+    csv_path = os.path.join(os.path.dirname(__file__), '../data/HACKA_DS.csv')
+    df = (pd.read_csv(csv_path, sep=';')
           .rename(columns=lambda x: x.strip())
           )
     return df

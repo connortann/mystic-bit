@@ -2,10 +2,12 @@
 
 import pandas as pd
 import numpy as np
+import os
 
 def load_log_data():
     """ Return pandas dataframe of log data """
-    df = (pd.read_csv('../data/HACKA_DS.csv', sep=';')
+    csv_path = os.path.join(os.path.dirname(__file__), '../data/HACKA_DS.csv')
+    df = (pd.read_csv(csv_path, sep=';')
           .rename(columns=lambda x: x.strip())
           )
     return df
@@ -65,15 +67,19 @@ def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=range(0, 50, 2),
     return df_ml
 
 
-def get_log_predictions(df_pred, well_name, bit_depth):
+def get_log_predictions(df_pred, well_name, bit_depth, tol=1):
     """ Lookup predictions indexed by depth """
 
     prediction_col_names = [c for c in df_pred if 'pred' in c]
 
-    pred_row = df_pred[(df_pred.HACKANAME == well_name) &
-                       (df_pred.TVDSS == bit_depth)]
 
-    assert len(pred_row) == 1, 'No predictions found for that well at that depth'
+    pred_row = df_pred[(df_pred.HACKANAME == well_name) &
+                       (df_pred.TVDSS > bit_depth - tol) &
+                       (df_pred.TVDSS < bit_depth + tol)
+                       ]
+
+    assert len(pred_row) > 0, 'No predictions found for that well near that depth'
+    pred_row = pred_row.iloc[0:1, :]
 
     result = (pd.melt(pred_row,
                       id_vars=['HACKANAME', 'TVDSS'],

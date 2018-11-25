@@ -1,4 +1,5 @@
 from flask import Flask
+from flask import redirect
 from flask import request
 from flask import render_template
 import numpy as np 
@@ -7,15 +8,25 @@ import matplotlib.pyplot as plt
 import json
 from mysticbit import ml
 from mysticbit import munging
+import dash
+import dash_core_components as dcc
+import dash_html_components as html 
 
 import plotly
 import plotly.plotly as py
 import plotly.graph_objs as go
 from plotly.offline import plot, iplot, download_plotlyjs
+from dash.dependencies import Input, Output
+from datetime import datetime as dt
+from pandas_datareader import data as web
 
 
-
+# dash_app = dash.Dash(__name__)
+# server = dash_app.server
 app = Flask(__name__)
+
+wells = [{'name':'B03'}, {'name':'B05'}, {'name':'B06'}, {'name':'B08'}, {'name':'B12'}, {'name':'B13'}, {'name':'B14'}, {'name':'B200'}, {'name':'G06'}, {'name':'G08'}, {'name':'G09'}, {'name':'G10'}, {'name':'G12'}, {'name':'G15'}, {'name':'G16'}, {'name':'G070'}, {'name':'B0700'}, {'name':'G17'}]
+external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
 
 @app.route('/')
 def home():
@@ -107,6 +118,125 @@ def run_main():
 def minimal():
     data = request.args.get('data', '')
     return render_template('minimal.html', data=data)
+
+@app.route('/dash-test')
+def run_dash_test():
+    external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+    dash_app = dash.Dash(__name__, 
+    external_stylesheets=external_stylesheets,
+    server=app,
+    url_base_pathname='/dashtest/')
+
+    dash_app.layout = html.Div(children=[
+        
+        html.H1(children='Hello Dash'),
+        html.Div(children='''Dash: A web application framework for Python.'''),
+
+        dcc.Graph(id='example graph', figure={
+            'data' : [
+                {'x': [1, 2, 3], 'y': [4, 1, 2], 'type': 'bar', 'name': 'SF'},
+                {'x': [1, 2, 3], 'y': [2, 4, 5], 'type': 'bar', 'name': u'Montréal'},
+            ],
+            'layout': {
+                'title': 'Dash Data Visualisation'
+            }
+        })
+    ])
+    return redirect('/dashtest/')
+
+@app.route('/dash-slider')
+def run_dash_slider():
+    df = munging.load_log_data()
+
+    external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+    dash_app = dash.Dash(__name__, 
+    external_stylesheets=external_stylesheets,
+    server=app,
+    url_base_pathname='/dashslider/')
+
+
+    dash_app.layout = html.Div([
+        dcc.Graph(id='graph-with-slider',),
+        dcc.Slider(
+            id='tvdss-slider',
+            min=df['GR'].min(),
+            max=df['GR'].max(),
+            value=df['GR'].min(),
+            marks={str(tvdss): str(tvdss) for tvdss in df['GR'].unique()}
+        )
+    ])
+
+
+    @dash_app.callback(
+        dash.dependencies.Output('graph-with-slider', 'figure'),
+        [dash.dependencies.Input('tvdss-slider', 'value')])
+    
+    def update_figure(selected_tvdss):
+        filtered_df = df[df.tvdss == selected_tvdss]
+        traces = []
+        for i in filtered_df.HACKANAME.unique():
+            df_by_well = filtered_df[filtered_df['HACKANAME'] == i]
+            traces.append(go.Scatter(
+                x=df_by_well['GR'],
+                y=df_by_well['TVDSS'],
+                text=df_by_well['HACKANAME'],
+                mode='markers',
+                opacity=0.7,
+                marker={
+                    'size': 15,
+                    'line': {'width': 0.5, 'color': 'white'}
+                },
+                name=i
+            ))
+        return {
+            'data': traces,
+            'layout': go.Layout(
+                xaxis={'type': 'log', 'title': 'tvdss'},
+                yaxis={'title': 'gr', 'range': [0, 5000]},
+                margin={'l': 40, 'b': 40, 't': 10, 'r': 10},
+                legend={'x': 0, 'y': 1},
+                hovermode='closest'
+            )
+        }
+    return redirect('/dashslider/')
+
+@app.route('/dash-scatter')
+def run_dash_scatter():
+    dash_app =  dash.Dash(__name__,
+        server=app,
+        url_base_pathname='/dashscatter/')
+
+    dash_app.layout = html.Div([
+        html.H1('Stock Tickers'),
+        dcc.Dropdown(
+            id='my-dropdown',
+            options=[
+                {'label': 'Coke', 'value': 'COKE'},
+                {'label': 'Tesla', 'value': 'TSLA'},
+                {'label': 'Apple', 'value': 'AAPL'}
+            ],
+            value='COKE'
+        ),
+        dcc.Graph(id='my-graph')
+    ])
+
+    @dash_app.callback(Output('my-graph', 'figure'), [Input('my-dropdown', 'value')])
+    def update_graph(selected_dropdown_value):
+        df = web.DataReader(
+            selected_dropdown_value, data_source='google',
+            start=dt(2017, 1, 1), end=dt.now())
+        return {
+            'data': [{
+                'x': df.index,
+                'y': df.Close
+            }]
+        }
+
+    return redirect('/dashscatter/')
+
+
 
 if __name__ == "__main__":
     # for debug

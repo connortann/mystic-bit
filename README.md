@@ -23,6 +23,7 @@ Show simulation of drilling, with predictions updating
 - notebooks: Jupyter notebooks
 - mysticbit: module to store key python functions
 - data: data (obvs)
+- webapp/petex-hackathon: plotted/interactive charts
 
 ### Conda environment
 

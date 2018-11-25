@@ -13,24 +13,30 @@ def load_log_data():
 
 def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=range(0, 50, 2),
                         label_cols=['GR'], label_lags=[2, 4, 6, 8, 10], dropna=True,
-                        sample_step=1.5):
+                        sample_step=0.2):
     """ Create dataframe with 'features' and 'labels', from the raw log dataframe """
 
     # Drop unused columns
     cols_to_keep = list(set(['TVDSS', 'HACKANAME', 'RES_ID'] + feature_cols + label_cols))
     df = df[cols_to_keep].copy()
 
-    # Resample at uniform rate
+    # Process each well in turn
     df = df.set_index('TVDSS')
     resampled_dfs = []
 
     for well in df['HACKANAME'].unique():
-        df_well = df[df['HACKANAME'] == well]
+        # Resample
+        df_well = df[df['HACKANAME'] == well].set_index('TVDSS')
         new_index = np.arange(int(df_well.index.min()), df_well.index.max(), sample_step)
-        df_well = df_well.reindex(new_index, method='nearest', tolerance=sample_step * 0.6)
+        df_well = df_well.reindex(new_index, method='nearest', tolerance=sample_step)
+
+        # Interpolate
+        for col in feature_cols:
+            df_well[col] = df_well[col].interpolate(method='index', limit=6, limit_area='inside')
+
         resampled_dfs.append(df_well)
 
-    df_ml = pd.concat(resampled_dfs, axis=0)
+    df_ml = pd.concat(resampled_dfs, axis=0).reset_index()
     print(df_ml.head())
 
     # Feature lagging (above the current bit depth)

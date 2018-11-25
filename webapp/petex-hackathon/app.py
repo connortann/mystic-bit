@@ -1,7 +1,9 @@
+# coding=utf-8
 from flask import Flask
 from flask import redirect
 from flask import request
 from flask import render_template
+from flask_bootstrap import Bootstrap
 import numpy as np 
 import pandas as pd 
 import matplotlib.pyplot as plt
@@ -18,12 +20,14 @@ import plotly.graph_objs as go
 from plotly.offline import plot, iplot, download_plotlyjs
 from dash.dependencies import Input, Output
 from datetime import datetime as dt
+pd.core.common.is_list_like = pd.api.types.is_list_like
 from pandas_datareader import data as web
 
 
 # dash_app = dash.Dash(__name__)
 # server = dash_app.server
 app = Flask(__name__)
+Bootstrap(app)
 
 wells = [{'name':'B03'}, {'name':'B05'}, {'name':'B06'}, {'name':'B08'}, {'name':'B12'}, {'name':'B13'}, {'name':'B14'}, {'name':'B200'}, {'name':'G06'}, {'name':'G08'}, {'name':'G09'}, {'name':'G10'}, {'name':'G12'}, {'name':'G15'}, {'name':'G16'}, {'name':'G070'}, {'name':'B0700'}, {'name':'G17'}]
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']

@@ -11,6 +11,28 @@ def load_log_data():
     return df
 
 
+def resample_well(df_well, feature_cols, sample_step):
+    """ Resamples and interpolates data in a single well. """
+
+    # Resample
+    df_well = df_well.copy()
+    df_well = df_well.set_index('TVDSS')
+    new_index = np.arange(int(df_well.index.min()), df_well.index.max(), sample_step)
+    df_well = df_well.reindex(new_index, method='nearest', tolerance=sample_step)
+
+    # Interpolate
+    #for col in feature_cols:
+    #    df_well[col] = df_well[col].interpolate(method='index', limit=5, limit_area='inside')
+
+    df_well.interpolate(method='index', limit=5, limit_area='inside', inplace=True)
+
+    # Fill in nans
+    for col in ['HACKANAME', 'RES_ID']:
+        df_well[col] = df_well[col].fillna(method='bfill').fillna(method='ffill')
+
+    return df_well.reset_index()
+
+
 def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=range(0, 50, 2),
                         label_cols=['GR'], label_lags=[2, 4, 6, 8, 10], dropna=True,
                         sample_step=0.2):
@@ -18,44 +40,29 @@ def create_ml_dataframe(df, feature_cols=['GR'], feature_lags=range(0, 50, 2),
 
     # Drop unused columns
     cols_to_keep = list(set(['TVDSS', 'HACKANAME', 'RES_ID'] + feature_cols + label_cols))
-    df = df[cols_to_keep].copy()
+    df_ml = df[cols_to_keep].copy()
 
-    # Process each well in turn
-    df = df.set_index('TVDSS')
-    resampled_dfs = []
-
-    for well in df['HACKANAME'].unique():
-        # Resample
-        df_well = df[df['HACKANAME'] == well].set_index('TVDSS')
-        new_index = np.arange(int(df_well.index.min()), df_well.index.max(), sample_step)
-        df_well = df_well.reindex(new_index, method='nearest', tolerance=sample_step)
-
-        # Interpolate
-        for col in feature_cols:
-            df_well[col] = df_well[col].interpolate(method='index', limit=6, limit_area='inside')
-
-        resampled_dfs.append(df_well)
-
-    df_ml = pd.concat(resampled_dfs, axis=0).reset_index()
-    print(df_ml.head())
+    # Process each well in turn on TVDSS index
+    df_ml = (df_ml.groupby('HACKANAME')
+             .apply(resample_well, feature_cols, sample_step)
+             .reset_index(drop=True))
 
     # Feature lagging (above the current bit depth)
     for col in feature_cols:
         for lag in feature_lags:
-            kwargs = {col + '_lag_' + str(lag): lambda x: x[col].groupby('HACKANAME').shift(lag)}
+            kwargs = {col + '_lag_' + str(lag): lambda x: x.groupby('HACKANAME')[col].shift(lag)}
             df_ml = df_ml.assign(**kwargs)
 
     # Label lagging (below the current bit depth)
     for col in label_cols:
         for lag in label_lags:
-            kwargs = {col + '_futr_' + str(lag): lambda x: x[col].groupby('HACKANAME').shift(-lag)}
+            kwargs = {col + '_futr_' + str(lag): lambda x: x.groupby('HACKANAME')[col].shift(-lag)}
             df_ml = df_ml.assign(**kwargs)
 
     if dropna:
         df_ml = df_ml.dropna()
 
-
-    return df_ml.reset_index()
+    return df_ml
 
 
 def get_log_predictions(df_pred, well_name, bit_depth):

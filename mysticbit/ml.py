@@ -67,3 +67,8 @@ def make_predictions(models, df_ml, X_cols, y_cols):
         df_pred[pred_cols] = pd.DataFrame(y_pred, index=df_pred.index)
 
     return df_pred
+
+def cross_val(models, df_ml, X_cols, y_cols):
+
+
+    return results

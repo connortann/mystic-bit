@@ -8,7 +8,7 @@
 * Lawrie
 * Alessandro
 * Dan Austin
-* Jeremy
+* Jeremy Fortun
 
 ### Vision
 

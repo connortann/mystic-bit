@@ -5,8 +5,8 @@
 * Connor Tann
 * Justin Boylan-Toomey
 * Patrick Davies
-* Lawrie
-* Alessandro
+* Lawrie Cowley
+* Alessandro Cristofori
 * Dan Austin
 * Jeremy Fortun
 

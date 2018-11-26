@@ -2,7 +2,7 @@
 
 Project from OGA Hackathon London 2018.
 
-Team: Connor Tann, Justin Boylan-Toomey, Patrick Davies, Lawrie, Alessandro, Dan Austin, Jeremy Fortun
+Team: Connor Tann, Justin Boylan-Toomey, Patrick Davies, Lawrie Cowley, Alessandro Cristofori, Dan Austin, Jeremy Fortun
 
 ### Vision
 

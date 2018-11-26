@@ -1,28 +1,37 @@
 # Mystic Bit
 
-### Team
+Project from OGA Hackathon London 2018.
 
-* Connor Tann
-* Justin Boylan-Toomey
-* Patrick Davies
-* Lawrie
-* Alessandro
-* Dan Austin
-* Jeremy Fortun
+Team: Connor Tann, Justin Boylan-Toomey, Patrick Davies, Lawrie, Alessandro, Dan Austin, Jeremy Fortun
 
 ### Vision
 
-Predict permeability ahead of the bit, using offset well log data.
+Real-time, near-bit prediction 1-40m ahead of the drill-bit, using offset well log data
 
-Also predict uncertainty range
+Also predict the uncertainty range.
 
-Show simulation of drilling, with predictions updating
+Delivering value through:
+* Improved drilling safety
+* Faster decision making 
+* Improved well targeting
+* Leveraging existing field observations
+
+### Results
+
+A set of 30 Gradient Boosting Decision Tree Regressors were successfully trained on the well data,
+enabling prediction ahead of the bit. Lagged OH features were created, and a quartile loss function
+was used to capture uncertainty. 30+ separate models trained!
+
+A mysticbit Python module was created to deploy the ML framework
+
+Web app created with Flask, Plotly and Dash.
+
 
 ### Repo layout
 
 - notebooks: Jupyter notebooks
-- mysticbit: module to store key python functions
-- data: data (obvs)
+- mysticbit: core python module containing ML models
+- data: anonymized well log data data
 - webapp/petex-hackathon: plotted/interactive charts
 
 ### Conda environment

@@ -1,3 +1,0 @@
-f2_array_flat.npy filter=lfs diff=lfs merge=lfs -text
-f3_array_flat.npy filter=lfs diff=lfs merge=lfs -text
-f1_array_flat.npy filter=lfs diff=lfs merge=lfs -text

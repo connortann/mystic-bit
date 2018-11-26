@@ -1,8 +1,0 @@
-master/Beginner_Python.ipynb
-master/Data_wrangling_with_pandas.ipynb
-master/Flask_getting_started.ipynb
-master/Get_info_from_web.ipynb
-master/Intro_to_machine_learning_classification.ipynb
-master/Intro_to_OOP.ipynb
-master/Intro_to_pandas.ipynb
-master/Practice_OOP.ipynb

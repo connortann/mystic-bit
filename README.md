@@ -2,11 +2,18 @@
 
 Project from OGA Hackathon London 2018.
 
-Team: Connor Tann, Justin Boylan-Toomey, Patrick Davies, Lawrie Cowley,
-Alessandro Cristofori, Dan Austin, Jeremy Fortun
+
+* Connor Tann
+* Justin Boylan-Toomey
+* Patrick Davies
+* Lawrie Cowley
+* Alessandro Cristofori
+* Dan Austin
+* Jeremy Fortun
 
 For a summary of the project, see the
 [PowerPoint presentation](O&G_Hackathon_Mystic_Bit.pptx).
+
 
 ### Vision
 

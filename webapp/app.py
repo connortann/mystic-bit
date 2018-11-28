@@ -35,10 +35,64 @@ from plotly.offline import plot, iplot, download_plotlyjs
 app = Flask(__name__)
 Bootstrap(app)
 
-wells = ['B03','B05','B06','B08','B12','B13','B14','B200','G06','G08','G09','G10','G12','G15','G16','G070','B0700','G17']
+wells = ['B05','B200','G08','G09','G10','G15','G16']
 wells_names = [{'name': v} for v in wells]
 wells_labels = [{'label': 'well {0}'.format(v), 'value' : v} for v in wells]
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
+
+predictions_app =  dash.Dash(__name__,
+    server=app,
+    url_base_pathname='/modelspredictions/')
+
+df_logs = munging.load_log_data()
+df_ml = munging.create_ml_dataframe(df_logs)
+X_cols = [c for c in df_ml.columns if 'lag' in c]
+y_cols = [c for c in df_ml.columns if 'futr' in c]
+models = ml.make_multiple_models(df_ml, X_cols, y_cols)
+df_pred = ml.make_predictions(models, df_ml, X_cols, y_cols)
+
+predictions_app.layout = html.Div([
+    html.A(html.Button('Home Page', id='button', className='button button-primary'), href='/mystic-bit'),
+    html.H1('Preditcions'),
+    dcc.Dropdown(
+        id='my-dropdown',
+        options=wells_labels,
+        value='B05'
+    ),
+    dcc.Slider(
+    id='my-slider',
+    min=1700,
+    max=1900,
+    step=2,
+    value=1800,
+    className="pred-slider"),
+    dcc.Graph(id='my-graph', style={'height': 1000, 'width': 300})
+], style={'width': 400})
+
+@predictions_app.callback(Output('my-graph', 'figure'), [
+    Input('my-dropdown', 'value'),
+    Input('my-slider', 'value')])
+def update_graph(selected_dropdown_value, selected_depth):
+    # Filtering on update
+    well_name = selected_dropdown_value
+    bit_depth = selected_depth
+    try:
+        df_pred_filtered = munging.get_log_predictions(df_pred, well_name, bit_depth)
+    except AssertionError:
+        df_pred_filtered = None
+
+    filtered_df = df_logs.loc[df_logs['HACKANAME'] == selected_dropdown_value]
+    return {
+        'data': [{
+            'x': filtered_df.GR,
+            'y': filtered_df.TVDSS
+        }, {
+            'x': df_pred_filtered.value,
+            'y': df_pred_filtered.TVDSS,
+            'type': 'scatter',
+        }],
+        'layout': go.Layout(yaxis={'autorange': 'reversed'})
+    }
 
 @app.route('/')
 def home():
@@ -47,29 +101,10 @@ def home():
 @app.route('/mystic-bit')
 def run_mystic_bit():
     df = pd.read_csv('./static/HACKA_DS_WELL_SPATIAL.csv')
-    x = df['X'].tolist()
-    y = df['Y'].tolist()
-    labels = df['hackname'].tolist()
-    # sns_wells = sns.load_dataset(df)
     plt = sns.relplot(x="X", y="Y", hue="hackname", size="hackname", 
     sizes=(150, 150), facet_kws=dict({'legend_out':True}),data=df)
-
     new_title = 'Wells'
     plt._legend.set_title(new_title)
-
-    # plt.subplots_adjust(bottom = 0.1)
-    # plt.scatter(x, y, s=8**2, marker='o',facecolors='none', edgecolors='r', label="Well")
-    # plt.xlabel("X Axis")
-    # plt.ylabel("Y Axis")
-    # plt.legend(loc='upper left')
-    # for label, x,y in zip(labels, x, y):
-    #     plt.annotate(
-    #         label,
-    #         xy=(x,y), xytext=((x-42), (y+42)),
-    #         textcoords='offset points', ha='right', va='bottom',
-    #         bbox=dict(boxstyle='round,pad=0.5', fc='white', alpha=0.5),
-    #         arrowprops=dict(arrowstyle = '->', connectionstyle='arc3,rad=0'))
-    # plt.plot()
     plt.set(xlim=(0, 30))
     plt.set(ylim=(0, 30))
     plt.savefig('static/map_plot.png')
@@ -100,7 +135,7 @@ def test():
     filtered_df = df.loc[df['HACKANAME'] == select]
     depth = filtered_df['TVDSS'].tolist()
     gr_actual = filtered_df['GR'].tolist()
-    #gr_p10 = df['GR_PREDICT_P10'].tolist()
+    # gr_p10 = df['GR_PREDICT_P10'].tolist()
     # gr_p50 = df['GR_PREDICT_P50'].tolist()
     # gr_p90 = df['GR_PREDICT_P90'].tolist()
     trace0 = go.Scatter(x = gr_actual, y = depth,name = 'gr actual',line = dict(color = ('rgb(205, 12, 24)'), width = 4))
@@ -121,7 +156,7 @@ def test():
     # return render_template('test_predicted.html')
     return(str(select)) # just to see what select is
 
-	
+
 @app.route('/dashboard')
 def run_main():
     df = munging.load_log_data()
@@ -220,62 +255,7 @@ def run_dash_slider():
     return redirect('/dashslider/')
 
 @app.route('/models-predictions')
-def run_dash_scatter():
-    dash_app =  dash.Dash(__name__,
-        server=app,
-        url_base_pathname='/modelspredictions/')
-
-    df_logs = munging.load_log_data()
-    df_ml = munging.create_ml_dataframe(df_logs)
-    X_cols = [c for c in df_ml.columns if 'lag' in c]
-    y_cols = [c for c in df_ml.columns if 'futr' in c]
-    models = ml.make_multiple_models(df_ml, X_cols, y_cols)
-    df_pred = ml.make_predictions(models, df_ml, X_cols, y_cols)
-
-    dash_app.layout = html.Div([
-        html.A(html.Button('Home Page', id='home-button'), href='/mystic-bit'),
-        html.H1('Preditcions'),
-        dcc.Dropdown(
-            id='my-dropdown',
-            options=wells_labels,
-            value='B05'
-        ),
-        dcc.Slider(
-        id='my-slider',
-        min=1700,
-        max=1900,
-        step=2,
-        value=1800,
-        ),
-        dcc.Graph(id='my-graph', style={'height': 1000, 'width': 300})
-    ])
-
-    @dash_app.callback(Output('my-graph', 'figure'), [
-        Input('my-dropdown', 'value'),
-        Input('my-slider', 'value')])
-    def update_graph(selected_dropdown_value, selected_depth):
-            # Filtering on update
-        well_name = selected_dropdown_value
-        bit_depth = selected_depth
-        try:
-            df_pred_filtered = munging.get_log_predictions(df_pred, well_name, bit_depth)
-        except AssertionError:
-            df_pred_filtered = None
-
-        # df_logs = munging.load_log_data()
-        filtered_df = df_logs.loc[df_logs['HACKANAME'] == selected_dropdown_value]
-        return {
-            'data': [{
-                'x': filtered_df.GR,
-                'y': filtered_df.TVDSS
-            }, {
-                'x': df_pred_filtered.value,
-                'y': df_pred_filtered.TVDSS,
-                'type': 'scatter',
-            }],
-            'layout': go.Layout(yaxis={'autorange': 'reversed'})
-        }
-
+def run_model_predictions():
     return redirect('/modelspredictions/')
 
 # launch the app in a new web browser page

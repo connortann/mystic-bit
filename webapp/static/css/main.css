@@ -6,8 +6,16 @@
     background-size: cover;
 }
 
-h1 {
+.jumbotron > h1 {
     color: black;
     text-shadow: 2px 2px 4px white;
+    margin-left: 10px;
 }
 
+.jumbotron  p {
+    margin-left: 10px;
+}
+
+.nav, .nav-pills {
+    margin-left: 10px;
+}

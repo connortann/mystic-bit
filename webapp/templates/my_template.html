@@ -14,10 +14,10 @@
 <body>
     {% block navbar %}
     <ul class="nav nav-pills">
-        <li role="presentation" class="active"><a href="#">Home</a></li>
+        <!--li role="presentation" class="active"><a href="#">Home</a></li>
         <li role="presentation"><a href="/mystic-depth">Mystic Depth</a></li>
-        <li role="presentation"><a href="/home">Well Detail</a></li>
-        <li role="presentation"><a href="/models-predictions">Dash Plot</a></li>
+        <li role="presentation"><a href="/home">Well Detail</a></li-->
+        <li role="presentation" class="active"><a href="/models-predictions">Predictions</a></li>
       </ul>
     {% endblock %}
 
@@ -25,7 +25,7 @@
     <div class="jumbotron">
         <h1>Welcome to Mystic-bit</h1>
         <p>PETEX HACKATHON - Nov 2018</p>
-        <p><a class="btn btn-primary btn-lg" href="/models-predictions" role="button">Get Started</a></p>
+        <p><a class="btn btn-primary btn-lg start-btn" href="/models-predictions" role="button">Get Started</a></p>
       </div>
     <img src={{ url }} alt="Chart" height="400" width="400"/>
     <p>Map showing wells locations</p>
